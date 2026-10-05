@@ -132,7 +132,7 @@ namespace RuntimeUnityEditor.Bepin5.LogViewer
                     var searchString = SearchString;
                     var isEmpty = string.IsNullOrEmpty(searchString) && GUI.GetNameOfFocusedControl() != "sbox";
                     if (isEmpty) GUI.color = Color.gray;
-                    GUI.SetNextControlName("sbox");
+                    // GUI.SetNextControlName("sbox");
                     var newString = GUILayout.TextField(isEmpty ? "Search log text and stack traces..." : searchString, IMGUIUtils.LayoutOptionsExpandWidthTrue);
                     if (GUI.changed) SearchString = newString;
                     GUI.color = Color.white;

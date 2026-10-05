@@ -240,19 +240,19 @@ namespace RuntimeUnityEditor.Core.REPL
 
                 GUILayout.BeginHorizontal();
                 {
-                    GUI.SetNextControlName("replInput");
+                    // GUI.SetNextControlName("replInput");
                     _inputField = GUILayout.TextArea(_inputField);
 
                     if (Event.current.type == EventType.Repaint)
                     {
                         if (_refocus)
                         {
-                            if (_refocusCursorIndex < 0)
-                            {
-                                _refocusCursorIndex = (int)ReflectionUtils.GetValue(_cursorIndex, _textEditor);
-                                _refocusSelectIndex = (int)ReflectionUtils.GetValue(_selectIndex, _textEditor);
-                            }
-                            GUI.FocusControl("replInput");
+                            // if (_refocusCursorIndex < 0)
+                            // {
+                                // _refocusCursorIndex = (int)ReflectionUtils.GetValue(_cursorIndex, _textEditor);
+                                // _refocusSelectIndex = (int)ReflectionUtils.GetValue(_selectIndex, _textEditor);
+                            // }
+                            // GUI.FocusControl("replInput");
                             _refocus = false;
                         }
                         else if (_refocusCursorIndex >= 0)

@@ -616,7 +616,7 @@ namespace RuntimeUnityEditor.Core.ObjectTree
 
                     GUI.changed = false;
 
-                    GUI.SetNextControlName("searchbox");
+                    // GUI.SetNextControlName("searchbox");
                     _searchText = GUILayout.TextField(_searchText, IMGUIUtils.LayoutOptionsExpandWidthTrue);
 
                     // Show indicator that search results are still being updated

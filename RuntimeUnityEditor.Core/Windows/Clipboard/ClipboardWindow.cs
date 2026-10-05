@@ -86,7 +86,7 @@ namespace RuntimeUnityEditor.Core.Clipboard
 
                             GUI.changed = false;
                             var controlName = editControlNamePrefix + index;
-                            GUI.SetNextControlName(controlName);
+                            // GUI.SetNextControlName(controlName);
 
                             var isBeingEdited = _editingIndex == controlName;
                             var prevColor = GUI.backgroundColor;

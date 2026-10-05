@@ -200,15 +200,15 @@ namespace RuntimeUnityEditor.Core.Inspector
                     {
                         GUILayout.Label("Filter:", IMGUIUtils.LayoutOptionsExpandWidthFalse);
 
-                        GUI.SetNextControlName(SearchBoxName);
+                        // GUI.SetNextControlName(SearchBoxName);
                         SearchString = GUILayout.TextField(SearchString, IMGUIUtils.LayoutOptionsExpandWidthTrue);
 
-                        if (_focusSearchBox)
-                        {
-                            GUI.FocusWindow(WindowId);
-                            GUI.FocusControl(SearchBoxName);
-                            _focusSearchBox = false;
-                        }
+                        // if (_focusSearchBox)
+                        // {
+                            // GUI.FocusWindow(WindowId);
+                            // GUI.FocusControl(SearchBoxName);
+                            // _focusSearchBox = false;
+                        // }
 
                         _showFields = GUILayout.Toggle(_showFields, "Fields", IMGUIUtils.EmptyLayoutOptions);
                         _showProperties = GUILayout.Toggle(_showProperties, "Properties", IMGUIUtils.EmptyLayoutOptions);
