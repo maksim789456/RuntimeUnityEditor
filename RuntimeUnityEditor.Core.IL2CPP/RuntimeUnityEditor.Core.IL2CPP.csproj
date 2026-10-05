@@ -14,6 +14,11 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
 		<DefineConstants>$(DefineConstants);IL2CPP</DefineConstants>
+
+        <RestoreAdditionalProjectSources>
+            https://nuget.bepinex.dev/v3/index.json;
+            https://nuget.windows10ce.com/nuget/v3/index.json
+        </RestoreAdditionalProjectSources>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -40,34 +45,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.664" >
+		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.755" >
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.Il2Cppmscorlib" Version="2023.16.10" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.UnityEngine" Version="2021.3.14.2" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.UnityEngine.ImageConversionModule" Version="2021.3.14.2" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.UnityEngine.PhysicsModule" Version="2021.3.14.2" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.UnityEngine.Terrain" Version="2021.3.14.2" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="IllusionLibs.HoneyCome.UnityEngine.UI" Version="2021.3.14.2" >
-			<IncludeAssets>compile</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
+<!--        <PackageReference Include="UnityEngine.Modules" Version="6000.3.17" PrivateAssets="all" />-->
 	</ItemGroup>
+
+    <PropertyGroup>
+        <PathBeforeSteam Condition="$([MSBuild]::IsOSPlatform('Linux'))">$(HOME)/.local/share/</PathBeforeSteam>
+        <PathBeforeSteam Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(MSBuildProgramFiles32)/</PathBeforeSteam>
+        <BigWalkGameRootDir Condition="$(BigWalkGameRootDir) == ''">$(PathBeforeSteam)Steam/steamapps/common/Big Walk/</BigWalkGameRootDir>
+        <BigWalkBepInExDir Condition="$(BigWalkBepInExDir) == ''">$(BigWalkGameRootDir)/BepInEx/</BigWalkBepInExDir>
+        <ManagedDir>$(BigWalkBepInExDir)/interop/</ManagedDir>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(ManagedDir)')">
+        <LocalReferences
+                Include="$(ManagedDir)*.dll"
+                Exclude="$(ManagedDir)Mono*.dll;$(ManagedDir)netstandard.dll;$(ManagedDir)System*.dll;$(ManagedDir)mscorlib.dll"
+        />
+        <Reference Include="@(LocalReferences)" Private="false" />
+
+        <Reference Include="$(ManagedDir)Assembly-CSharp.dll" Private="false" Publicize="true" />
+    </ItemGroup>
 
 </Project>
