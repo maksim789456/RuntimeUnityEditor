@@ -44,7 +44,8 @@ namespace RuntimeUnityEditor.Core.Utils
         {
             var t2d = tex.ToTexture2D();
 #if IL2CPP
-            var arr = t2d.EncodeToPNG();
+            // var arr = t2d.EncodeToPNG();
+            var arr = ImageConversion.EncodeToPNG(t2d);
             Object.Destroy(t2d);
             return arr;
 #else
@@ -147,7 +148,8 @@ namespace RuntimeUnityEditor.Core.Utils
                     try
                     {
 #if IL2CPP
-                        tex.LoadImage(data, false);
+                        // tex.LoadImage(data, false);
+                        ImageConversion.LoadImage(tex, data, false);
                         return tex;
 #else
                         var m = typeof(Texture2D).GetMethod("LoadImage", new Type[] { typeof(byte[]) });

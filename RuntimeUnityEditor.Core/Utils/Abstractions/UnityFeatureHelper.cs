@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace RuntimeUnityEditor.Core.Utils.Abstractions
 {
@@ -290,7 +291,9 @@ namespace RuntimeUnityEditor.Core.Utils.Abstractions
         {
             var tex = new Texture2D(1, 1, TextureFormat.ARGB32, false);
 #if IL2CPP
-            tex.LoadImage(texData, false);
+            // tex.LoadImage(texData, false);
+            ImageConversion.LoadImage(tex, texData, false);
+            // tex.Load
 #else
             // Around Unity 2018 the LoadImage and other export/import methods got moved from Texture2D to extension methods
             var loadMethod = typeof(Texture2D).GetMethod("LoadImage", new[] { typeof(byte[]) });
